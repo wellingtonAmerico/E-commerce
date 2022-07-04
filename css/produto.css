@@ -1,0 +1,183 @@
+.cores label::after{
+    content: '';
+    display: block;
+/* seletor personalizado no label do radio*/
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+
+    box-sizing: border-box;    /*altera o box model para não mudar de tamanho com adiçao da borda */
+
+/*posição vertical dos seletores personalizados*/
+    position: absolute;
+    top: 30px;
+}
+.cores label:hover::after{
+    border: 6px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+.cores{
+    position: relative;
+    padding-top: 90px;
+}
+
+/*cores dos seletores nos label radio*/
+label[for=verde]::after{
+    background-color: #3c6;
+    left: 0;/*posição horizontal dos seletores personalizados*/
+}
+label[for=rosa]::after{
+    background-color: #f66;
+    left: 60px;/*posição horizontal dos seletores personalizados*/
+}
+label[for=azul]::after{
+    background-color: #66f;
+    left: 120px;/*posição horizontal dos seletores personalizados*/
+}
+/*borda seletor personalizado selecionado*/
+.cores input:checked + label::after{
+    border: 6px solid rgba(0,0,0,0.3);
+    transition: 0.8s;
+}
+.cores input[type=radio]{
+    display: none; /*esconde seletor original do radio*/
+}
+.cores input:not(:checked) + label img{
+    display: none;
+}
+.cores legend{/*concerta padding da legend por ser tratado diferente no firefox*/
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.cores label img{/*Não deixa imagem vazar da tela*/
+    display: block;
+    max-width: 100%;
+    border: 2px solid #ccc
+}
+/*estilizando a pagina*/
+.produto{
+    color: #333;
+    line-height: 1.3;
+    margin-top: 2em;
+}
+.produto h1{
+    font-size: 1.8em;
+    font-weight: bold;
+}
+.produto p{
+    font-size: 1.2em;
+    font-style: italic;
+    margin-bottom: 1em;
+}
+.produto legend{
+    display: block;
+    font: bold 0.9em/2.5 Arial;
+    text-transform: uppercase;
+}
+.comprar{ /*botão comprar */
+    background: #91bd3c;
+    border: none;
+    color: #333;
+
+    font-size: 1.4em;
+    text-transform: uppercase;
+
+    box-shadow: 0 1px 3px #777;
+
+    display: block;
+    padding: 0.5em 1em;
+    margin: 1em 0;
+}
+/* Responsivo desktop*/
+@media (min-width: 630px){
+    .produto{ /*posicionamento da foto*/
+        position: relative;
+        padding-left: 40%;
+        font-size: 1.2em;/*almenta escala das letras*/
+    }
+    .cores label img{ /*ainda posicionamento da foto*/
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 35%;
+        max-height: 100%;
+    }
+    .cores{
+        position: static;/*para foto não se posicionar em relação as cores*/
+        padding-top: 0;
+    }
+    .cores label::after{/*posicionamento dos seletores*/
+        position: static;
+        float: left;
+        margin-right: 10px;
+    }
+    .cores legend{
+        position: static;/* não precisa mais se adaptar ao mozila*/
+    }
+    fieldset{/*posicionando os fildset lado a lado*/
+        display: inline-block;
+        vertical-align: top;
+        margin: 1em 0;
+        min-width: 240px;
+        width: 45%;
+    }
+}
+/*estilo dos detalhes*/
+.detalhes{
+    padding: 2em 0;
+}
+.detalhes h2{
+    font-size: 1.5em;
+    line-height: 2;
+}
+.detalhes p{
+    margin: 1em 0;
+    font-size: 1em;
+    line-height: 1.5;
+    max-width: 36em;
+}
+@media (min-width: 500px){/*fonte responsiva*/
+    .detalhes{
+        font-size: 1.2em;
+    }
+}
+/*estilizando tabela detalhes*/
+table{
+    border-spacing: 0.2em;
+    border-collapse: separate;
+    margin: 15px 0;
+}
+thead{
+    background-color: #999;
+}
+thead th{
+    font-weight: bold;
+    padding: 0.3em 1em;
+    text-align: center;
+}
+td{
+    padding: 0.3em;
+}
+tr::nth-child(2n){
+    background-color: #ccc;
+}
+td:first-child{
+    font-style: italic;
+}
+.produto-back{/*fundo do layout*/
+    background-color: #f2f2f2;
+    margin-top: 1em;
+    border-top: 2px solid #ccc;
+}
+.tamanho output{
+    display: inline-block;
+    height: 44px;
+    width: 44px;
+    line-height: 44px;
+    text-align: center;
+
+    border: 3px solid #666;
+    border-radius: 50%;
+    color: #555
+}
