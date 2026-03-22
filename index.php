@@ -84,7 +84,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
                             die('Erro na query: ' . mysqli_error($conexao));
                         }
 
-                        #while ($produto = mysqli_fetch_array($dados)):
+                        while ($produto = mysqli_fetch_array($dados)):
                     ?>
 
                     <li>
@@ -110,8 +110,23 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
                 <h2>Mais Vendidos</h2>
                 <ol>
                     <?php
-                        $conexao = mysqli_connect("db", "ecommerce", "ecommerce123", "ecommerce");
+                        $host = getenv('MYSQLHOST') ?: 'db';
+                        $port = (int)(getenv('MYSQLPORT') ?: 3306);
+                        $user = getenv('MYSQLUSER') ?: 'ecommerce';
+                        $pass = getenv('MYSQLPASSWORD') ?: 'ecommerce123';
+                        $db   = getenv('MYSQLDATABASE') ?: 'ecommerce';
+
+                        $conexao = mysqli_connect($host, $user, $pass, $db, $port);
+
+                        if (!$conexao) {
+                            die('Erro na conexão (mais vendidos): ' . mysqli_connect_error());
+                        }
+
                         $dados = mysqli_query($conexao, "SELECT * FROM produtos ORDER BY vendas ASC LIMIT 0, 12");
+
+                        if (!$dados) {
+                            die('Erro na query (mais vendidos): ' . mysqli_error($conexao));
+                        }
 
                         while ($produto = mysqli_fetch_array($dados)):
                     ?>
