@@ -1,3 +1,11 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+?>
+
 <!--Conteudo do cabeçalho-->
         <?php 
             $cabecalho_title = "Mirror Fashion";
@@ -55,14 +63,16 @@
             <section class="painel novidades">
                 <h2>Novidades</h2>
                 <ol>
+
                     <?php
                         $host = getenv('MYSQLHOST') ?: 'db';
-                        $port = getenv('MYSQLPORT') ?: '3306';
+                        #$port = getenv('MYSQLPORT') ?: '3306';
+                        $port = (int)(getenv('MYSQLPORT') ?: 3306);
                         $user = getenv('MYSQLUSER') ?: 'ecommerce';
                         $pass = getenv('MYSQLPASSWORD') ?: 'ecommerce123';
                         $db   = getenv('MYSQLDATABASE') ?: 'ecommerce';
 
-                        $conexao = mysqli_connect($host, $user, $pass, $db, (int)$port);
+                        $conexao = mysqli_connect($host, $user, $pass, $db, $port);
 
                         if (!$conexao) {
                             die('Erro na conexão: ' . mysqli_connect_error());
@@ -74,7 +84,7 @@
                             die('Erro na query: ' . mysqli_error($conexao));
                         }
 
-                        while ($produto = mysqli_fetch_array($dados)):
+                        #while ($produto = mysqli_fetch_array($dados)):
                     ?>
 
                     <li>
