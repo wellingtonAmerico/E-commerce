@@ -1,15 +1,10 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Força apenas um MPM ativo
-RUN a2dismod mpm_event || true \
- && a2dismod mpm_worker || true \
- && rm -f /etc/apache2/mods-enabled/mpm_event.* \
- && rm -f /etc/apache2/mods-enabled/mpm_worker.* \
- && a2enmod mpm_prefork \
- && a2enmod rewrite
+WORKDIR /app
+COPY . /app
 
-COPY . /var/www/html/
+EXPOSE 8080
 
-RUN chown -R www-data:www-data /var/www/html
+CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-8080} -t /app"]
