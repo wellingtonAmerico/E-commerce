@@ -11,12 +11,29 @@
         <link rel="stylesheet" href="./css/open-iconic-bootstrap.css">
 
         <?php
-/*Conectando banco de dados*/
-            $compra = $_POST['id'];
-            $conexao = mysqli_connect("127.0.0.1", "root", "123456", "wd43");
+            $host = getenv('MYSQLHOST') ?: 'db';
+            $port = getenv('MYSQLPORT') ?: '3306';
+            $user = getenv('MYSQLUSER') ?: 'ecommerce';
+            $pass = getenv('MYSQLPASSWORD') ?: 'ecommerce123';
+            $db   = getenv('MYSQLDATABASE') ?: 'ecommerce';
+
+            $conexao = mysqli_connect($host, $user, $pass, $db, (int)$port);
+
+            if (!$conexao) {
+                die('Erro na conexão: ' . mysqli_connect_error());
+            }
+
+            $compra = intval($_POST['id'] ?? 0);
+
             $dados = mysqli_query($conexao, "SELECT * FROM produtos WHERE id = $compra");
+
+            if (!$dados) {
+                die('Erro na query: ' . mysqli_error($conexao));
+            }
+
             $produto = mysqli_fetch_array($dados);
         ?>
+
     </head>
 
     <body>

@@ -1,12 +1,30 @@
-        <?php 
-/*Conectando banco de dados*/
-            $conexao = mysqli_connect("127.0.0.1", "root", "123456", "wd43");
-            $dados = mysqli_query($conexao, "SELECT * FROM produtos WHERE id = $_GET[id]");
+        <?php
+            $host = getenv('MYSQLHOST') ?: 'db';
+            $port = getenv('MYSQLPORT') ?: '3306';
+            $user = getenv('MYSQLUSER') ?: 'ecommerce';
+            $pass = getenv('MYSQLPASSWORD') ?: 'ecommerce123';
+            $db   = getenv('MYSQLDATABASE') ?: 'ecommerce';
+
+            $conexao = mysqli_connect($host, $user, $pass, $db, (int)$port);
+
+            if (!$conexao) {
+                die('Erro na conexão: ' . mysqli_connect_error());
+            }
+
+            $id = intval($_GET['id'] ?? 0);
+
+            $dados = mysqli_query($conexao, "SELECT * FROM produtos WHERE id = $id");
+
+            if (!$dados) {
+                die('Erro na query: ' . mysqli_error($conexao));
+            }
+
             $produto = mysqli_fetch_array($dados);
-/*Conteudo do cabeçalho*/
+
+            /* Conteúdo do cabeçalho */
             $cabecalho_title = "Produto - Mirror Fashion";
             $cabecalho_css = '<link rel="stylesheet" href="./css/produto.css">';
-            include("cabecalho.php"); 
+            include("cabecalho.php");
         ?>
 
         <!--corpo do site-->

@@ -1,16 +1,3 @@
-/*
- * Site produzido durante	o	curso Desenvolvimento Web com HTML, CSS e JavaScript da Caelum	
- * para	um	e-commerce	de	moda	chamado	Mirror	Fashion com os	conteúdos	e	o	design	
- * da	loja	já	pré-definidos.
- * Será construido	várias	páginas	da	loja	com	intuito	de	aprender	os	conceitos	de	
- * HTML,	CSS	e	JS focando	na	implementação do prjeto,	papel do	programador	front-end.
- */
-
-/**
- * @version 1.0
- * @autor Wellington Américo - Caelum Cursos
- */
-
 <!--Conteudo do cabeçalho-->
         <?php 
             $cabecalho_title = "Mirror Fashion";
@@ -69,8 +56,23 @@
                 <h2>Novidades</h2>
                 <ol>
                     <?php
-                        $conexao = mysqli_connect("127.0.0.1", "root", "123456", "wd43");
+                        $host = getenv('MYSQLHOST') ?: 'db';
+                        $port = getenv('MYSQLPORT') ?: '3306';
+                        $user = getenv('MYSQLUSER') ?: 'ecommerce';
+                        $pass = getenv('MYSQLPASSWORD') ?: 'ecommerce123';
+                        $db   = getenv('MYSQLDATABASE') ?: 'ecommerce';
+
+                        $conexao = mysqli_connect($host, $user, $pass, $db, (int)$port);
+
+                        if (!$conexao) {
+                            die('Erro na conexão: ' . mysqli_connect_error());
+                        }
+
                         $dados = mysqli_query($conexao, "SELECT * FROM produtos ORDER BY data DESC LIMIT 0, 12");
+
+                        if (!$dados) {
+                            die('Erro na query: ' . mysqli_error($conexao));
+                        }
 
                         while ($produto = mysqli_fetch_array($dados)):
                     ?>
@@ -98,7 +100,7 @@
                 <h2>Mais Vendidos</h2>
                 <ol>
                     <?php
-                        $conexao = mysqli_connect("127.0.0.1", "root", "123456", "wd43");
+                        $conexao = mysqli_connect("db", "ecommerce", "ecommerce123", "ecommerce");
                         $dados = mysqli_query($conexao, "SELECT * FROM produtos ORDER BY vendas ASC LIMIT 0, 12");
 
                         while ($produto = mysqli_fetch_array($dados)):
