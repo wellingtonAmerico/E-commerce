@@ -1,17 +1,15 @@
 FROM php:8.2-apache
 
-# PHP + MySQL
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Corrigir Apache MPM
-RUN a2dismod mpm_event mpm_worker || true
-RUN a2enmod mpm_prefork
+# Força apenas um MPM ativo
+RUN a2dismod mpm_event || true \
+ && a2dismod mpm_worker || true \
+ && rm -f /etc/apache2/mods-enabled/mpm_event.* \
+ && rm -f /etc/apache2/mods-enabled/mpm_worker.* \
+ && a2enmod mpm_prefork \
+ && a2enmod rewrite
 
-# Habilitar rewrite
-RUN a2enmod rewrite
-
-# Copiar projeto para o Apache
 COPY . /var/www/html/
 
-# Permissões
 RUN chown -R www-data:www-data /var/www/html
