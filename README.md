@@ -67,7 +67,7 @@ $conexao = mysqli_connect(
     $db["pass"],
     ltrim($db["path"], "/")
 );
-´´´
+```
 
 ✔ Evita hardcode de credenciais
 ✔ Padrão utilizado em ambientes reais
