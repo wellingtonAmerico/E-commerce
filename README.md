@@ -9,11 +9,17 @@ https://e-commerce-production-4b87.up.railway.app
 
 ## 🧩 Arquitetura
 Usuário
+
 ↓
+
 Railway (HTTP)
+
 ↓
+
 PHP Server (Docker)
+
 ↓
+
 MySQL Service (Railway)
 
 ---
@@ -61,6 +67,8 @@ $conexao = mysqli_connect(
     $db["pass"],
     ltrim($db["path"], "/")
 );
+´´´
+
 ✔ Evita hardcode de credenciais
 ✔ Padrão utilizado em ambientes reais
 
