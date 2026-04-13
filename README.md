@@ -69,18 +69,15 @@ $conexao = mysqli_connect(
 );
 ```
 
-✔ Evita hardcode de credenciais
-✔ Padrão utilizado em ambientes reais
-
 ---
 
 🧪 Estratégia de testes
 
 Durante o desenvolvimento foram criados endpoints para validar cada camada:
 
-ping.html → valida servidor web
-health.php → valida execução PHP
-index.php → valida aplicação completa + banco
+ping.html → valida servidor web  
+health.php → valida execução PHP  
+index.php → valida aplicação completa + banco  
 
 ---
 
@@ -100,40 +97,41 @@ CMD ["php", "-S", "0.0.0.0:8080"]
 
 ---
 
-🧠 Principais aprendizados
-Deploy real de aplicação web
-Separação entre aplicação e banco de dados
-Uso de variáveis de ambiente em produção
-Debug de infraestrutura (logs de build/runtime)
-Resolução de conflitos de servidor (Apache → PHP CLI)
+🧠 Principais aprendizados  
+Deploy real de aplicação web  
+Separação entre aplicação e banco de dados  
+Uso de variáveis de ambiente em produção  
+Debug de infraestrutura (logs de build/runtime)  
+Resolução de conflitos de servidor (Apache → PHP CLI)  
 Integração completa PHP + MySQL
 
 ---
 
 📦 Estrutura do projeto
 
-/e-commerce
-│
-├── index.php
-├── produto.php
-├── conecta.php
-│
-├── /css
-├── /img
-├── /js
-├── /fonts
-│
-├── Dockerfile
-└── dados.sql
+/e-commerce  
+│  
+├── index.php  
+├── produto.php  
+├── conecta.php  
+│  
+├── /css  
+├── /img  
+├── /js  
+├── /fonts  
+│  
+├── Dockerfile  
+└── dados.sql  
 
 ---
 
-⚠️ Observações
-Projeto desenvolvido com foco em aprendizado prático
-Algumas melhorias futuras:
-autenticação de usuários
-carrinho persistente
-painel administrativo
+⚠️ Observações  
+
+Projeto desenvolvido com foco em aprendizado prático  
+Algumas melhorias futuras:  
+autenticação de usuários  
+carrinho persistente  
+painel administrativo  
 
 ---
 
