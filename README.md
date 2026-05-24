@@ -1,60 +1,62 @@
-# 🛒 E-commerce PHP + MySQL
+# E-commerce PHP + MySQL
 
-Aplicação de e-commerce desenvolvida com PHP e MySQL, com deploy em produção utilizando Railway e containerização com Docker.
+Full stack e-commerce application developed with PHP and MySQL, deployed in production using Railway and Docker.
 
-🔗 **Live Demo:**  
+The project was created to practice backend development, database integration, containerization and production deployment.
+
+---
+
+## Deploy
+
 https://e-commerce-production-4b87.up.railway.app
 
 ---
 
-## 🧩 Arquitetura
-Usuário
+## Technologies Used
 
-↓
-
-Railway (HTTP)
-
-↓
-
-PHP Server (Docker)
-
-↓
-
-MySQL Service (Railway)
-
----
-
-## 🚀 Funcionalidades
-
-- Listagem dinâmica de produtos via banco de dados
-- Página de detalhes do produto
-- Organização por categorias
-- Interface responsiva
-- Integração completa com MySQL
-
----
-
-## 🛠️ Stack utilizada
-
-**Backend**
+### Backend
 - PHP 8
 - MySQL
 
-**Frontend**
+### Frontend
 - HTML5
 - CSS3
 - JavaScript
 
-**Infraestrutura**
+### Infrastructure
 - Docker
-- Railway (deploy)
-- Variáveis de ambiente (segurança)
+- Railway
+- Environment Variables
 
 ---
 
-## 🔐 Conexão com banco (produção)
+## Architecture
 
-A aplicação utiliza variável de ambiente para conexão segura com o banco:
+```text
+User
+  ↓
+Railway HTTP
+  ↓
+PHP Server (Docker)
+  ↓
+MySQL Database
+```
+
+---
+
+## Features
+
+- Dynamic product listing
+- Product details page
+- MySQL database integration
+- Responsive interface
+- Production deployment with Docker
+
+---
+
+## Environment Variables
+
+The application uses environment variables for secure database connection:
 
 ```php
 $url = getenv("MYSQL_URL");
@@ -71,20 +73,19 @@ $conexao = mysqli_connect(
 
 ---
 
-🧪 Estratégia de testes
+## Testing Strategy
 
-Durante o desenvolvimento foram criados endpoints para validar cada camada:
+During development, isolated endpoints were created to validate each application layer:
 
-ping.html → valida servidor web  
-health.php → valida execução PHP  
-index.php → valida aplicação completa + banco  
+- ping.html → web server validation
+- health.php → PHP execution validation
+- index.php → full application + database validation
 
 ---
 
-🐳 Deploy com Docker
+## Docker Deployment
 
-A aplicação foi containerizada utilizando PHP CLI server:
-
+```dockerfile
 FROM php:8.2-cli
 
 WORKDIR /app
@@ -94,48 +95,58 @@ COPY . .
 RUN docker-php-ext-install mysqli
 
 CMD ["php", "-S", "0.0.0.0:8080"]
+```
 
 ---
 
-🧠 Principais aprendizados  
-Deploy real de aplicação web  
-Separação entre aplicação e banco de dados  
-Uso de variáveis de ambiente em produção  
-Debug de infraestrutura (logs de build/runtime)  
-Resolução de conflitos de servidor (Apache → PHP CLI)  
-Integração completa PHP + MySQL
+## Project Structure
+
+```bash
+e-commerce/
+│
+├── index.php
+├── produto.php
+├── conecta.php
+│
+├── css/
+├── img/
+├── js/
+├── fonts/
+│
+├── Dockerfile
+└── dados.sql
+```
 
 ---
 
-📦 Estrutura do projeto
+## What Was Practiced
 
-/e-commerce  
-│  
-├── index.php  
-├── produto.php  
-├── conecta.php  
-│  
-├── /css  
-├── /img  
-├── /js  
-├── /fonts  
-│  
-├── Dockerfile  
-└── dados.sql  
+- Full stack web development
+- PHP and MySQL integration
+- Production deployment
+- Docker containerization
+- Environment variables
+- Infrastructure debugging
+- Build and runtime logs analysis
+- Git version control
 
 ---
 
-⚠️ Observações  
+## Future Improvements
 
-Projeto desenvolvido com foco em aprendizado prático  
-Algumas melhorias futuras:  
-autenticação de usuários  
-carrinho persistente  
-painel administrativo  
+- User authentication
+- Persistent shopping cart
+- Administrative dashboard
+- Product management panel
 
 ---
 
-👨‍💻 Autor
+## Author
 
 Wellington Américo
+
+LinkedIn:
 https://www.linkedin.com/in/wellington-am%C3%A9rico/
+
+GitHub:
+https://github.com/wellingtonAmerico
