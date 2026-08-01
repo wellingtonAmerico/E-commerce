@@ -4,8 +4,6 @@ services:
     container_name: ecommerce_web
     ports:
       - "8080:80"
-    volumes:
-      - ./:/var/www/html
     depends_on:
       - db
     environment:

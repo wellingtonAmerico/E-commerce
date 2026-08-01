@@ -55,27 +55,16 @@
             <section class="painel novidades">
                 <h2>Novidades</h2>
                 <ol>
-
                     <?php
-                        $host = getenv('MYSQLHOST') ?: 'db';
-                        $port = (int)(getenv('MYSQLPORT') ?: 3306);
-                        $user = getenv('MYSQLUSER') ?: 'ecommerce';
-                        $pass = getenv('MYSQLPASSWORD') ?: 'ecommerce123';
-                        $db   = getenv('MYSQLDATABASE') ?: 'ecommerce';
+                        include 'config/database.php';
 
-                        $conexao = mysqli_connect($host, $user, $pass, $db, $port);
+                        $dados = $conexao->query("
+                            SELECT * FROM produtos
+                            ORDER BY data DESC
+                            LIMIT 12
+                        ");
 
-                        if (!$conexao) {
-                            die('Erro na conexão: ' . mysqli_connect_error());
-                        }
-
-                        $dados = mysqli_query($conexao, "SELECT * FROM produtos ORDER BY data DESC LIMIT 0, 12");
-
-                        if (!$dados) {
-                            die('Erro na query: ' . mysqli_error($conexao));
-                        }
-
-                        while ($produto = mysqli_fetch_array($dados)):
+                        while ($produto = $dados->fetch(PDO::FETCH_ASSOC)):
                     ?>
 
                     <li>
@@ -101,25 +90,15 @@
                 <h2>Mais Vendidos</h2>
                 <ol>
                     <?php
-                        $host = getenv('MYSQLHOST') ?: 'db';
-                        $port = (int)(getenv('MYSQLPORT') ?: 3306);
-                        $user = getenv('MYSQLUSER') ?: 'ecommerce';
-                        $pass = getenv('MYSQLPASSWORD') ?: 'ecommerce123';
-                        $db   = getenv('MYSQLDATABASE') ?: 'ecommerce';
+                        include 'config/database.php';
 
-                        $conexao = mysqli_connect($host, $user, $pass, $db, $port);
+                        $dados = $conexao->query("
+                            SELECT * FROM produtos
+                            ORDER BY vendas DESC
+                            LIMIT 12
+                        ");
 
-                        if (!$conexao) {
-                            die('Erro na conexão (mais vendidos): ' . mysqli_connect_error());
-                        }
-
-                        $dados = mysqli_query($conexao, "SELECT * FROM produtos ORDER BY vendas ASC LIMIT 0, 12");
-
-                        if (!$dados) {
-                            die('Erro na query (mais vendidos): ' . mysqli_error($conexao));
-                        }
-
-                        while ($produto = mysqli_fetch_array($dados)):
+                        while ($produto = $dados->fetch(PDO::FETCH_ASSOC)):
                     ?>
 
                     <li>
