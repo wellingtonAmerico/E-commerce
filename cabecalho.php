@@ -9,7 +9,12 @@
         
         <link rel="stylesheet" href="css/estilo.css">
         <link rel="stylesheet" href="css/reset.css">
-
+        <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/x-icon" href="img/favicon/favicon.ico">
+        <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/svg+xml" href="img/favicon/favicon.svg">
+        <link rel="manifest" href="img/favicon/site.webmanifest">
+        
         <?php print @$cabecalho_css; ?>
 
     </head>		
