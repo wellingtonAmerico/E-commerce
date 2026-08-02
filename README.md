@@ -1,22 +1,22 @@
-# E-commerce PHP + MySQL
+# Mirror Fashion — E-commerce PHP + SQLite
 
-Full stack e-commerce application developed with PHP and MySQL, deployed in production using Railway and Docker.
+Full stack e-commerce application developed with **PHP 8.2, SQLite and Docker**, deployed in production on **Render**.
 
-The project was created to practice backend development, database integration, containerization and production deployment.
+The project was created to practice backend development, database integration, containerization, cloud deployment and continuous delivery using GitHub.
 
 ---
 
-## Deploy
+## Live Demo
 
-https://e-commerce-production-4b87.up.railway.app
+🌐 https://e-commerce-7laf.onrender.com/
 
 ---
 
 ## Technologies Used
 
 ### Backend
-- PHP 8
-- MySQL
+- PHP 8.2
+- SQLite (PDO)
 
 ### Frontend
 - HTML5
@@ -25,8 +25,9 @@ https://e-commerce-production-4b87.up.railway.app
 
 ### Infrastructure
 - Docker
-- Railway
-- Environment Variables
+- Apache
+- Render
+- GitHub
 
 ---
 
@@ -35,11 +36,11 @@ https://e-commerce-production-4b87.up.railway.app
 ```text
 User
   ↓
-Railway HTTP
+Render HTTPS
   ↓
-PHP Server (Docker)
+Apache + PHP 8.2 (Docker)
   ↓
-MySQL Database
+SQLite Database
 ```
 
 ---
@@ -48,73 +49,114 @@ MySQL Database
 
 - Dynamic product listing
 - Product details page
-- MySQL database integration
+- SQLite database integration
 - Responsive interface
-- Production deployment with Docker
+- Dockerized application
+- Automatic deployment from GitHub
+- HTTPS enabled
 
 ---
 
-## Environment Variables
+## Running Locally
 
-The application uses environment variables for secure database connection:
+### Clone the repository
 
-```php
-$url = getenv("MYSQL_URL");
+```bash
+git clone https://github.com/wellingtonAmerico/E-commerce.git
+cd E-commerce
+```
 
-$db = parse_url($url);
+### Start with Docker
 
-$conexao = mysqli_connect(
-    $db["host"],
-    $db["user"],
-    $db["pass"],
-    ltrim($db["path"], "/")
-);
+```bash
+docker-compose up --build
+```
+
+### Access the application
+
+```text
+http://localhost:8080
 ```
 
 ---
 
-## Testing Strategy
+## Docker Configuration
 
-During development, isolated endpoints were created to validate each application layer:
-
-- ping.html → web server validation
-- health.php → PHP execution validation
-- index.php → full application + database validation
-
----
-
-## Docker Deployment
+### Dockerfile
 
 ```dockerfile
-FROM php:8.2-cli
+FROM php:8.2-apache
 
-WORKDIR /app
+RUN apt-get update && apt-get install -y \
+    libsqlite3-dev \
+    sqlite3 \
+    && docker-php-ext-install pdo_sqlite
 
-COPY . .
+COPY . /var/www/html/
 
-RUN docker-php-ext-install mysqli
+RUN chown -R www-data:www-data /var/www/html/database
 
-CMD ["php", "-S", "0.0.0.0:8080"]
+EXPOSE 80
 ```
 
 ---
 
 ## Project Structure
 
-```bash
+```text
 e-commerce/
 │
-├── index.php
-├── produto.php
-├── conecta.php
+├── config/
+│   └── database.php
+│
+├── database/
+│   └── ecommerce.sqlite
 │
 ├── css/
 ├── img/
 ├── js/
-├── fonts/
+│
+├── index.php
+├── produto.php
+├── checkout.php
+├── sobre.php
+├── cabecalho.php
+├── rodape.php
 │
 ├── Dockerfile
-└── dados.sql
+├── docker-compose.yml
+└── README.md
+```
+
+---
+
+## Database Connection
+
+The application uses **PDO with SQLite**:
+
+```php
+$databasePath = __DIR__ . '/../database/ecommerce.sqlite';
+
+$conexao = new PDO('sqlite:' . $databasePath);
+$conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+```
+
+---
+
+## Deployment
+
+The application is deployed on **Render** using the repository Dockerfile.
+
+### Deployment flow
+
+```text
+Git Push
+   ↓
+GitHub
+   ↓
+Render Auto Deploy
+   ↓
+Live Application
 ```
 
 ---
@@ -122,12 +164,13 @@ e-commerce/
 ## What Was Practiced
 
 - Full stack web development
-- PHP and MySQL integration
-- Production deployment
+- PHP with PDO
+- SQLite integration
 - Docker containerization
-- Environment variables
-- Infrastructure debugging
-- Build and runtime logs analysis
+- Cloud deployment
+- HTTPS configuration
+- Continuous deployment (CI/CD)
+- Infrastructure troubleshooting
 - Git version control
 
 ---
@@ -136,17 +179,23 @@ e-commerce/
 
 - User authentication
 - Persistent shopping cart
+- Checkout flow
 - Administrative dashboard
 - Product management panel
+- Search functionality
+- Mobile-first redesign
 
 ---
 
 ## Author
 
-Wellington Américo
+**Wellington Américo**
 
-LinkedIn:
-https://www.linkedin.com/in/wellington-am%C3%A9rico/
+- LinkedIn: https://www.linkedin.com/in/wellington-am%C3%A9rico/
+- GitHub: https://github.com/wellingtonAmerico
 
-GitHub:
-https://github.com/wellingtonAmerico
+---
+
+## License
+
+This project is for educational and portfolio purposes.
