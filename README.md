@@ -1,6 +1,6 @@
-# Mirror Fashion — E-commerce PHP + SQLite
+# E-commerce — PHP, SQLite & Docker
 
-Full stack e-commerce application developed with **PHP 8.2, SQLite and Docker**, deployed in production on **Render**.
+Full stack e-commerce application developed with **PHP 8.2, SQLite and Docker**, deployed as a live demo on **Render**.
 
 The project was created to practice backend development, database integration, containerization, cloud deployment and continuous delivery using GitHub.
 
@@ -49,7 +49,10 @@ SQLite Database
 
 - Dynamic product listing
 - Product details page
+- Database-driven product data
 - SQLite database integration
+- PDO-based database connection
+- Exception-based database error handling
 - Responsive interface
 - Dockerized application
 - Automatic deployment from GitHub
@@ -164,12 +167,14 @@ Live Application
 ## What Was Practiced
 
 - Full stack web development
-- PHP with PDO
-- SQLite integration
+- PHP backend development
+- PDO and SQLite integration
+- Database-driven application development
 - Docker containerization
+- Apache configuration
 - Cloud deployment
 - HTTPS configuration
-- Continuous deployment (CI/CD)
+- Automatic deployment from GitHub
 - Infrastructure troubleshooting
 - Git version control
 
